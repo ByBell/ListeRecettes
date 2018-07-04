@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Recipe :
+        <%= data[0].title %>
+    </title>
+</head>
+
+<body>
+    <%- include('partials/header'); %>
+
+        <main class="container">
+            <div class="row row-wrap">
+                <% for(let item of data){%>
+                    <article class="column" style="padding: 1rem">
+                        <h2>
+                            <%= item.title %>
+                        </h2>
+                        <p>
+                            <%= item.content %>
+                        </p>
+                        <div class="row row-wrap">
+                            <% for(let ingredient of item.ingredients){%>
+                                <div class="column column-20 perso">
+                                    <%= ingredient %>
+                                </div>
+                                <% } %>
+                        </div>
+                        <hr>
+                        <form method="post" action="/api/suppr-recipe/<%= item._id %>">
+                            <button type="submit">Supprimer la recipe</button>
+                        </form>
+
+                    </article>
+                    <% } %>
+            </div>
+
+            <hr>
+
+            <form method="get" action="/">
+                <button type="submit">Retour à liste de recipes</button>
+            </form>
+
+        </main>
+
+        <%- include('partials/footer'); %>
+</body>
+
+</html>
